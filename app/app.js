@@ -12,8 +12,9 @@ const snake = {
    // speed is in milliseconds per each step or move
    speed: {
       normal: 350,
-      max: 100
+      max: 80
    },
+   maxLength: Math.ceil(Math.pow(widthAndHeight, 2) * 0.4),
    score: 0,
    status: 0 // 0 : not moved yet, 1 : moved 1 box or 1 pixel
 }
@@ -36,10 +37,15 @@ startbtn.onclick = newGame;
 container.style.width = `${widthAndHeight * parseInt(pixelSize)}px`;
 container.style.height = `${widthAndHeight * parseInt(pixelSize)}px`;
 
+function removeAllChildren(element){
+   while (element.firstChild) {
+     element.removeChild(element.firstChild);
+   }
+}
 
 function newBoard(){
    clearInterval(snake.moving);
-   container.innerHTML = '';
+   removeAllChildren(container);
    for(let i = 0; i < widthAndHeight; i++){
       for(let j = 0; j < widthAndHeight; j++){
          const pixelBox = document.createElement('div');
@@ -106,7 +112,7 @@ function moveSnake(){
 
    // check if the snake goes off the map
    if(0 <= head && head < Math.pow(widthAndHeight, 2)){
-      if(snake.stack > 0){
+      if(snake.stack > 0 && snake.body.length < snake.maxLength){
          snake.body.push(head + snake.go)
          snake.stack--;
       }else {
