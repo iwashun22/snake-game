@@ -20,6 +20,7 @@ const snake = {
 }
 
 Object.freeze(snake.speed);
+Object.freeze(snake.maxLength);
 
    ///////  snake.status ///////
 // prevent from users when they pressed multiple keys at the same time
