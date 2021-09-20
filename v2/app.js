@@ -96,8 +96,6 @@ function startGame(){
    drawSnake();
    //console.log(snake.body);
    score.innerText = snake.score.toString();
-
-   clearInterval(snake.moving);
    
    changeSpeed();
 
@@ -165,6 +163,7 @@ function drawSnake(){
 }
 
 function changeSpeed(){
+   clearInterval(snake.moving);
    let speed;
    snake.speed.normal - (snake.score * 10) <= snake.speed.max ?
       speed = snake.speed.max
