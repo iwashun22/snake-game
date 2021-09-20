@@ -96,14 +96,7 @@ function startGame(){
    //console.log(snake.body);
    score.innerText = snake.score.toString();
 
-   clearInterval(snake.moving);
-   let speed;
-   snake.speed.normal - (snake.score * 10) <= snake.speed.max ?
-      speed = snake.speed.max
-   :
-      speed = snake.speed.normal - (snake.score * 10);
-
-   snake.moving = setInterval(startGame, speed);
+   changeSpeed();
 
    checkHits();
 }
@@ -156,6 +149,17 @@ function drawSnake(){
       pixel[i].classList.remove('head');
    }
    pixel[snake.body[snake.body.length - 1]].classList.add('head');
+}
+
+function changeSpeed(){
+   clearInterval(snake.moving);
+   let speed;
+   snake.speed.normal - (snake.score * 10) <= snake.speed.max ?
+      speed = snake.speed.max
+   :
+      speed = snake.speed.normal - (snake.score * 10);
+
+   snake.moving = setInterval(startGame, speed);
 }
 
 function checkHits(){
